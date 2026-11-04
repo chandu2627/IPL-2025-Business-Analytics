@@ -1,141 +1,246 @@
 # 🏏 IPL 2025 — Economic & Social Impact Analysis
-**Business Analytics Dashboard** — Analyzing IPL 2025's massive economic footprint alongside the social and health implications of its advertising ecosystem, using SQL and Power BI.
+
+**Business Analytics Dashboard | SQL • MySQL • Power BI**
+
+An end-to-end business analytics project analyzing IPL 2025's economic footprint, sponsorship revenue, advertiser risk, and demographic impact using MySQL and Power BI.
 
 ---
 
 ## 📌 Project Overview
-This project analyzes IPL 2025's central sponsorship contracts, advertiser portfolio, and target demographics to provide a **balanced view** of how IPL drives economic growth while examining the potential consequences of certain advertising practices (Pan Masala, Fantasy Gaming/Betting apps).
 
-Inspired by the **CodeBasics Resume Project Challenge #15** — "Provide Insights to a Business Magazine by Analysing the Economic and Social Impact of the IPL."
+The Indian Premier League (IPL) is one of the world's major sporting and entertainment events, generating substantial revenue through media rights, sponsorships, and advertising.
+
+This project explores the economic contribution of IPL 2025 while examining the potential health and social implications of its advertising ecosystem, particularly Fantasy Gaming/Betting and Pan Masala brands.
+
+The project was developed as part of the **CodeBasics Resume Project Challenge #15**:
+
+*"Provide Insights to a Business Magazine by Analysing the Economic and Social Impact of the IPL."*
 
 ---
 
-## 🎯 Problem Statement
-More than 50% of IPL advertisements are occupied by fantasy sports apps and pan masala brands. This project answers:
-- 💰 What is IPL's total revenue from central contracts in 2025, and who are the top contributors?
-- ⚠️ What is the health/social risk index of major advertisers?
-- 👥 How many people are exposed to high-risk advertising during IPL?
-- 📊 What is IPL's overall "Advertising Ethics Index" (AEI)?
+## 🎯 Business Problem
+
+The project addresses the following business questions:
+
+- 💰 What is the total revenue generated through IPL 2025 central contracts?
+- 📊 Which sponsors contribute the most to IPL revenue?
+- ⚠️ What are the health and social risks associated with major advertisers?
+- 👥 Which income groups are potentially more vulnerable to high-risk advertising?
+- ⚖️ What is the overall Advertising Ethics Index (AEI)?
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-| Tool | Purpose |
-|------|---------|
-| MySQL | Data cleaning, risk index calculation, KPI queries |
-| Power BI (DAX, Power Query) | 3-page interactive dashboard |
-| Excel | Source data (CodeBasics datasets) |
+| Technology | Purpose |
+|---|---|
+| Microsoft Excel | Original source datasets |
+| MySQL | Database storage, data quality checks, SQL analysis |
+| SQL | Aggregations, joins, CASE statements, window functions |
+| Power BI | Interactive dashboard development |
+| Power Query | MySQL data connection and transformation |
+| DAX | KPI calculations, measures and analytical metrics |
+| GitHub | Project version control and documentation |
 
 ---
 
-## 📊 Dataset
+## 🔄 Project Workflow
 
-| File | Contains |
-|------|----------|
-| fact_ipl_central_contracts | Sponsorship deals, amounts (2025), total deal value, duration |
-| fact_ipl_advertisers | Advertiser brands, categories, celebrity ambassadors, health/social risk |
-| fact_revenue_demography | Company revenue, target age/income groups, urban reach |
-| fact_summary_demography | Income groups, population estimates, key characteristics |
+**Excel → MySQL → Power BI → Business Insights**
 
-Source: CodeBasics Resume Project Challenge #15
+1. **Data Collection:** Started with four source datasets provided for the CodeBasics project challenge.
+2. **Database Setup:** Created the `ipl_2025_analysis_clean` database in MySQL.
+3. **Data Loading:** Imported the four source datasets into their corresponding MySQL tables.
+4. **Data Quality:** Performed missing-value checks and populated demographic estimation fields.
+5. **SQL Analysis:** Developed analytical queries using aggregations, joins, CASE statements and window functions.
+6. **Power BI Integration:** Connected Power BI directly to MySQL using Power Query.
+7. **Dashboard Development:** Created three interactive dashboard pages with DAX measures and visualizations.
 
 ---
 
-## 🔑 Key SQL Queries
+## 🗄️ MySQL Database Structure
 
-### 1. Total IPL Revenue 2025
-```sql
-SELECT SUM(CAST(amount_in_crores_2025 AS DECIMAL(10,2))) AS total_revenue_crores
-FROM fact_ipl_central_contracts
-WHERE amount_in_crores_2025 != 'n/a';
+**Database:** `ipl_2025_analysis_clean`
+
+The database contains four tables:
+
+| Table | Description | Records |
+|---|---|---:|
+| `fact_ipl_advertisers` | Advertiser brands, categories, ambassadors and health/social risks | 10 |
+| `fact_ipl_central_contracts` | Central sponsorship contracts and revenue | 9 |
+| `fact_revenue_demography` | Company revenue and demographic information | 6 |
+| `fact_summary_demography` | Income groups, population estimates and vulnerability levels | 3 |
+
+**Total records: 28**
+
+---
+
+## 📊 Key SQL Concepts Used
+
+- Database and table creation
+- Data quality and NULL checks
+- UPDATE statements
+- Aggregate functions: `SUM()`, `COUNT()`, `AVG()`
+- Conditional logic using `CASE WHEN`
+- Data type conversion using `CAST()`
+- String manipulation using `TRIM()` and `REPLACE()`
+- Joins: `INNER JOIN` and `LEFT JOIN`
+- Window functions using `SUM() OVER()`
+- Percentage contribution and risk calculations
+- Population and demographic analysis
+
+The complete SQL analysis is available in [`IPL_2025_Analysis.sql`](IPL_2025_Analysis.sql).
+
+---
+
+## 📈 Key Business Insights
+
+### Revenue & Sponsorship
+
+- 💰 **Total IPL 2025 Central Contract Revenue: ₹10,215 Crores**
+- 📺 JioCinema contributes approximately **46.51%** of revenue.
+- 📺 Star Sports contributes approximately **46.16%** of revenue.
+- Together, the two media partners contribute approximately **92.67%**.
+- 🏆 Tata Group contributes approximately **4.89%**.
+
+### Advertiser Risk Analysis
+
+- 🔴 **6 out of 10 advertisers (60%)** fall into the project's high-risk classification.
+- ⚖️ **Advertising Ethics Index (AEI): 33/100**.
+- 📊 Average Advertiser Risk Score: **3.50**.
+- Fantasy Gaming/Betting and Pan Masala/Mouth Freshener are the two categories highlighted in the risk distribution analysis.
+
+### Population & Social Impact
+
+- 👥 Estimated total population represented by the selected income groups: **340 million**.
+- 🔴 Estimated population in the Lower Income and Lower-Middle groups: **300 million**.
+- **High Vulnerability: 88.2%**.
+- **Safe Population: 11.8%**.
+
+*Population figures are midpoint-based estimates calculated from the supplied population ranges. They should not be interpreted as independently verified population counts or direct measurements of advertising exposure.*
+
+---
+
+## 📊 Power BI Dashboard
+
+The project contains three dashboard pages.
+
+### 1. Revenue & Contracts Dashboard
+
+- KPI Cards: Total Revenue, Total Sponsors, Advertising Ethics Index and High Risk Brands.
+- Donut Chart: Revenue contribution by sponsor.
+- Bar Chart: Revenue by contract type.
+- Table: Sponsor-wise contract details.
+
+### 2. Advertiser Risk Analysis
+
+- KPI Cards: High Risk Brands, Average Risk Score, High Risk Percentage and AEI.
+- Pie Chart: Advertiser distribution by category.
+- Bar Chart: Combined Risk Score by Brand.
+- Table: Advertiser brand, category, celebrity influence and health/social risk.
+
+### 3. Population & Social Impact
+
+- KPI Cards: Total Population at Risk, Safe Population Percentage, Total Population and High Vulnerability Percentage.
+- Bar Chart: Population by income group.
+- Column Chart: Vulnerability by income group.
+- Table: Income group, annual income, user population, key characteristics and vulnerability level.
+
+---
+
+## 📁 Repository Structure
+
+```text
+IPL-2025-Business-Analytics/
+│
+├── IPL_2025_Analysis.sql
+├── Ipl_2025_Analysis.pbix
+├── Ipl_2025_Analysis.pdf
+├── README.md
+│
+├── fact_ipl_advertisers.xlsx
+├── fact_ipl_central_contracts.xlsx
+├── fact_revenue_demography.xlsm
+└── fact_summary_demography.xlsx
 ```
 
-### 2. Health Risk Index (Qualitative to Quantitative)
-```sql
-SELECT advertiser_brand, category,
-    CASE 
-        WHEN health_social_risk LIKE '%Extremely High%' THEN 5
-        WHEN health_social_risk LIKE '%Carcinogenic%' THEN 4
-        WHEN health_social_risk LIKE '%Moderate%' THEN 2
-        WHEN health_social_risk LIKE '%Low%' THEN 1
-        ELSE 0
-    END AS health_risk_index
-FROM fact_ipl_advertisers
-ORDER BY health_risk_index DESC;
-```
-
-### 3. Advertising Ethics Index (AEI)
-```sql
-SELECT ROUND(
-    (SUM(CASE 
-        WHEN health_social_risk LIKE '%Low%' THEN 100
-        WHEN health_social_risk LIKE '%Moderate%' THEN 60
-        WHEN health_social_risk LIKE '%Carcinogenic%' THEN 15
-        WHEN health_social_risk LIKE '%Extremely High%' THEN 5
-        ELSE 0
-    END) / (COUNT(*) * 100)) * 100, 1) AS advertising_ethics_index
-FROM fact_ipl_advertisers;
-```
-
----
-
-## 💡 Key Insights
-
-- 💰 IPL 2025 Total Central Contract Revenue = **₹10,215 Crores**
-- 📺 Media Rights (JioCinema 46.51% + Star Sports 46.16%) = **92.67%** of total revenue
-- 🏆 Title Sponsor (Tata Group) contributes only **4.89%**
-- 🔴 **6 out of 10** major advertisers (60%) carry "Extremely High" or "Carcinogenic" health/social risk
-- ⚖️ Pan Masala and Fantasy Gaming/Betting categories each average a **5.0/5** risk score
-- 📉 **Advertising Ethics Index (AEI) = 33/100** — indicating a poor ethical advertising environment
-- 👥 An estimated **300 million people (88.2%)** fall in the income groups most targeted by high-risk advertisers
-- 🌟 Top celebrities (Shah Rukh Khan, Salman Khan, Rohit Sharma, Sourav Ganguly) endorse brands with the highest combined risk scores
-
----
-
-## 📋 Dashboard Pages
-
-### Page 1 — Revenue & Contracts Dashboard
-- KPI Cards: Total Revenue, Total Sponsors, Advertising Ethics Index, High Risk Brands
-- Donut Chart: Revenue share by sponsor
-- Bar Chart: Revenue by contract type
-- Table: Sponsor-wise contract details
-
-### Page 2 — Advertiser Risk Analysis
-- KPI Cards: High Risk Brands, Avg Risk Score, High Risk %, AEI
-- Bar Chart: Risk Score by Brand
-- Pie Chart: Risk distribution by category
-- Table: Brand, category, celebrity influence, health/social risk
-
-### Page 3 — Population & Social Impact
-- KPI Cards: Total Population at Risk, Safe Population %, Total Population, High Vulnerability %
-- Bar Chart: Population by income group
-- Column Chart: Vulnerability level by income group
-- Table: Income group demographics and vulnerability classification
-
----
-
-## 📁 Repository Files
+### Repository Files
 
 | File | Description |
-|------|-------------|
-| fact_ipl_central_contracts.xlsx | Raw sponsorship contracts data |
-| fact_ipl_advertisers.xlsx | Raw advertiser/brand data |
-| fact_revenue_demography.xlsx | Raw revenue and demographic data |
-| fact_summary_demography.xlsx | Raw income group population data |
-| IPL_2025_Analysis.sql | All SQL queries for KPI and risk analysis |
-| Ipl_2025_Analysis.pbix | Power BI 3-page interactive dashboard |
-| IPL_2025_Dashboard.pdf | Dashboard PDF export |
+|---|---|
+| `IPL_2025_Analysis.sql` | SQL database setup, data quality checks and analysis queries |
+| `Ipl_2025_Analysis.pbix` | Three-page interactive Power BI dashboard |
+| `Ipl_2025_Analysis.pdf` | Dashboard PDF export |
+| `fact_ipl_advertisers.xlsx` | Original advertiser dataset |
+| `fact_ipl_central_contracts.xlsx` | Original sponsorship contracts dataset |
+| `fact_revenue_demography.xlsm` | Original revenue and demographic dataset |
+| `fact_summary_demography.xlsx` | Original population summary dataset |
 
 ---
 
-## 🎯 Expected Outcomes Addressed
-- ✅ Balanced scorecard evaluating economic contribution vs. social impact
-- ✅ Custom "Advertising Ethics Index" KPI (scored 33/100 for IPL 2025)
-- ✅ Recommendations for responsible advertising while preserving revenue
+## ⚙️ How to Run This Project
+
+### Prerequisites
+
+- MySQL Server and MySQL Workbench
+- Microsoft Power BI Desktop
+- MySQL connector for Power BI
+
+### Step 1: Prepare the Database
+
+Create the database and tables using the SQL script.
+
+```sql
+CREATE DATABASE ipl_2025_analysis_clean;
+USE ipl_2025_analysis_clean;
+```
+
+### Step 2: Import the Source Datasets
+
+Import the four Excel datasets into their corresponding MySQL tables using MySQL Workbench.
+
+### Step 3: Execute SQL Analysis
+
+Run the SQL script to perform data quality checks, population updates and business analysis.
+
+### Step 4: Open Power BI
+
+Open `Ipl_2025_Analysis.pbix`.
+
+Configure the MySQL connection using your own server and database credentials if required.
+
+**Note:** The published PBIX was developed using a local MySQL connection. Other users must configure their own MySQL environment and connection settings to refresh the report.
+
+---
+
+## 📌 Methodology & Assumptions
+
+- Advertiser risk scores and the Advertising Ethics Index are project-defined analytical measures, not official regulatory ratings.
+- Population estimates use the midpoint of the supplied minimum and maximum ranges.
+- High-risk classification follows the definitions used in the Power BI KPI calculations.
+- Revenue figures are based on the supplied IPL 2025 central contract dataset.
+- Demographic insights are based on the supplied project datasets and should be interpreted within their limitations.
+
+---
+
+## 🎯 Project Outcomes
+
+- Built a MySQL database containing four analytical datasets.
+- Developed SQL queries for revenue, advertiser risk and demographic analysis.
+- Integrated MySQL with Power BI using Power Query.
+- Created a three-page interactive business intelligence dashboard.
+- Developed custom KPIs, including the Advertising Ethics Index.
+- Connected economic performance analysis with social-impact indicators.
 
 ---
 
 ## 👤 Author
-**Chandu Manikanta**  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/chandumanikanta/) [![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/chandu2627)
+
+**Chandu Manikanta**
+
+- [LinkedIn](https://www.linkedin.com/in/chandumanikanta/)
+- [GitHub](https://github.com/chandu2627)
+
+---
+
+**If you find this project useful, feel free to explore the repository and share your feedback!**
